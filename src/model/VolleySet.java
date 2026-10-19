@@ -1,12 +1,12 @@
 package model;
 
 public class VolleySet {
-    private int SetNumber;
+    private int setNumber;
     private int pointsA;
     private int pointsB;
 
     public VolleySet (int SetNumber){
-        this.SetNumber = SetNumber;
+        this.setNumber = SetNumber;
     }
 
     public void addPointA (){
@@ -19,7 +19,7 @@ public class VolleySet {
 
     public boolean isFinished (){
         int target;
-        if (SetNumber == 5) {
+        if (setNumber == 5) {
             target = 15;
         } else {
             target = 25;

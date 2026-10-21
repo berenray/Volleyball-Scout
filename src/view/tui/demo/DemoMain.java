@@ -1,37 +1,38 @@
 package view.tui.demo;
 
-import com.googlecode.lanterna.input.Key;
+import java.util.List;
 
-import view.tui.Draw;
+import view.MenuListener;
 import view.tui.TuiApp;
-import view.tui.TuiScreen;
+import view.tui.TuiMainMenuView;
 
 public class DemoMain
 {
     public static void main(String[] args)
     {
         TuiApp app = new TuiApp();
+        TuiMainMenuView menu = new TuiMainMenuView(app);
 
-        app.setActiveScreen(new TuiScreen()
+        menu.setListener(new MenuListener()
         {
             @Override
-            public void render()
+            public void onMenuItemSelected(int index)
             {
-                int columns = app.getScreen().getTerminalSize().getColumns();
-                int rows = app.getScreen().getTerminalSize().getRows();
-                Draw.box(app.getScreen(), 0, 0, columns, rows - 1, "VolleyScout");
-                Draw.hintBar(app.getScreen(), "Esc wyjscie");
-            }
-
-            @Override
-            public void handleKey(Key key)
-            {
-                if (key.getKind() == Key.Kind.Escape)
+                if (index == 3)
                 {
                     app.stop();
                 }
             }
+
+            @Override
+            public void onBack()
+            {
+                app.stop();
+            }
         });
+
+        menu.showMenu("Menu glowne",
+                List.of("Liga", "Mecz na zywo", "Ustawienia", "Wyjscie"));
 
         app.start();
     }
